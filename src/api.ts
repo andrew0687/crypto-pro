@@ -137,7 +137,11 @@ class Certificate {
         }
         return Promise.resolve();
     }
-    // Возвращает информацию об алгоритме
+    /**
+     * Возвращает информацию об алгоритме
+     *
+     * @return {Promise} -- объект с названием алгоритма {Object}
+     * */
     async getAlgorithm() {
         const cert = this._cert;
         const result: Partial<IAlgorithm> = {};
@@ -150,7 +154,7 @@ class Certificate {
         } catch (err: any) {
             return Promise.reject(getErrors('Ошибка при получении алгоритма: ', err));
         }
-        return Promise.resolve(result);
+        return Promise.resolve(result as IAlgorithm);
     }
 
     // Разбирает информацию сертификата по тэгам

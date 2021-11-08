@@ -1,3 +1,4 @@
+/// <reference types="cadesplugin" />
 import { TagsType } from './common';
 interface ICertificate {
     _cert: CAPICOM.CertificateAsync;
@@ -40,34 +41,24 @@ declare class Certificate {
     getProp(propName: keyof CAPICOM.CertificateAsync): Promise<string | number | object>;
     exportBase64(): Promise<string>;
     setCachePin(cachePin: any): Promise<void>;
-    getAlgorithm(): Promise<Partial<IAlgorithm>>;
+    /**
+     * Возвращает информацию об алгоритме
+     *
+     * @return {Promise} -- объект с названием алгоритма {Object}
+     * */
+    getAlgorithm(): Promise<IAlgorithm>;
     getCertInfo(tags: TagsType, propName: 'IssuerName' | 'SubjectName'): Promise<{
         title: string;
-        /**
-         * Получение OID сертификата
-         *
-         * @return {Array} Возвращает массив OID (улучшенного ключа)
-         * */
         descr: string;
         translated: boolean;
     }[] | null>;
     getOwnerInfo(): Promise<{
         title: string;
-        /**
-         * Получение OID сертификата
-         *
-         * @return {Array} Возвращает массив OID (улучшенного ключа)
-         * */
         descr: string;
         translated: boolean;
     }[] | null>;
     getIssuerInfo(): Promise<{
         title: string;
-        /**
-         * Получение OID сертификата
-         *
-         * @return {Array} Возвращает массив OID (улучшенного ключа)
-         * */
         descr: string;
         translated: boolean;
     }[] | null>;

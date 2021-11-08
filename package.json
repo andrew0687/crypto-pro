@@ -1,6 +1,6 @@
 {
   "name": "crypto-pro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Библиотека для взаимодействия с КриптоПро Browser плагин",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -17,5 +17,7 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/cadesplugin": "^2.1.3"
+  }
 }
