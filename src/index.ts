@@ -2,20 +2,20 @@
 import * as cryptoService from './api';
 
 const canPromise = Boolean(window.Promise);
-let errorMsg = '';
+let errorMsg: Error | null = null;
 let loadedPlugin = false;
-const onLoadCallbacs: any[] = [];
+const onLoadCallbacs: VoidFunction[] = [];
 const execOnloadQueue = () => {
     onLoadCallbacs.forEach((callback) => {
         callback();
     });
 };
-const passToWaitOnLoad = (callback: any) => {
-    if (Object.prototype.toString.call(callback) === '[object Function]') {
+const passToWaitOnLoad = (callback: VoidFunction) => {
+    if (typeof callback === 'function') {
         onLoadCallbacs.push(callback);
     }
 };
-const callOnLoad = (method: any) => {
+const callOnLoad = (method: VoidFunction) => {
     loadedPlugin ? method() : passToWaitOnLoad(method);
 };
 const finishLoading = () => {
@@ -23,12 +23,11 @@ const finishLoading = () => {
     execOnloadQueue();
 };
 
-type MethodType = keyof typeof cryptoService;
-type ServiceType<T extends MethodType> = typeof cryptoService[T];
+type ServicesType = typeof cryptoService;
+type MethodType = keyof ServicesType;
+type ServiceType<T extends MethodType> = ServicesType[T];
 // type Awaited<T> = T extends PromiseLike<infer U> ? U : T
 export const call = <T extends MethodType, P extends Parameters<ServiceType<T>>>(methodName: T, ...args: P): Promise<Awaited<ReturnType<ServiceType<T>>>> => {
-    // const args = Array.prototype.slice.call(props); // eslint-disable-line
-    // const methodName = args.shift();
     return new Promise((resolve, reject) => {
         callOnLoad(() => {
             if (errorMsg) {
@@ -45,12 +44,12 @@ if (cadesplugin) {
     cadesplugin.set_log_level(cadesplugin.LOG_LEVEL_ERROR);
     if (canPromise) {
         cadesplugin.then(finishLoading, () => {
-            errorMsg = 'КриптоПРО ЭЦП Browser Plug-In не доступен';
+            errorMsg = new Error('КриптоПРО ЭЦП Browser Plug-In не доступен');
             finishLoading();
         });
     } else {
-        console.error(new Error('Не поддерживаются промисы. Необходим полифилл.'));
+        errorMsg = new Error('Не поддерживаются промисы. Необходим полифилл.');
     }
 } else {
-    console.error(new Error('Не подключен модуль для работы с cades plugin'));
+    errorMsg = new Error('Не подключен модуль для работы с cades plugin');
 }
