@@ -25,7 +25,7 @@ const finishLoading = () => {
 
 type MethodType = keyof typeof cryptoService;
 type ServiceType<T extends MethodType> = typeof cryptoService[T];
-type Awaited<T> = T extends PromiseLike<infer U> ? U : T
+// type Awaited<T> = T extends PromiseLike<infer U> ? U : T
 export const call = <T extends MethodType, P extends Parameters<ServiceType<T>>>(methodName: T, ...args: P): Promise<Awaited<ReturnType<ServiceType<T>>>> => {
     // const args = Array.prototype.slice.call(props); // eslint-disable-line
     // const methodName = args.shift();
