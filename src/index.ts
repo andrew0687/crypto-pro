@@ -1,5 +1,6 @@
 // require('./vendor/cadesplugin_api');
 import * as cryptoService from './api';
+export {default as Certificate} from './certificate';
 
 const canPromise = Boolean(window.Promise);
 let errorMsg: Error | null = null;
@@ -23,11 +24,11 @@ const finishLoading = () => {
     execOnloadQueue();
 };
 
-type ServicesType = typeof cryptoService;
-type MethodType = keyof ServicesType;
-type ServiceType<T extends MethodType> = ServicesType[T];
+type TServices = typeof cryptoService;
+type TMethod = keyof TServices;
+type TService<T extends TMethod> = TServices[T];
 // type Awaited<T> = T extends PromiseLike<infer U> ? U : T
-export const call = <T extends MethodType, P extends Parameters<ServiceType<T>>>(methodName: T, ...args: P): Promise<Awaited<ReturnType<ServiceType<T>>>> => {
+export const call = <T extends TMethod, P extends Parameters<TService<T>>>(methodName: T, ...args: P): Promise<Awaited<ReturnType<TService<T>>>> => {
     return new Promise((resolve, reject) => {
         callOnLoad(() => {
             if (errorMsg) {

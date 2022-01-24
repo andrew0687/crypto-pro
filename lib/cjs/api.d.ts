@@ -1,74 +1,4 @@
-/// <reference types="cadesplugin" />
-import { TagsType } from './common';
-interface ICertificate {
-    _cert: CAPICOM.CertificateAsync;
-    thumbprint: string;
-    subjectName: string;
-    issuerName: string;
-    validFrom: any;
-    validTo: any;
-}
-interface IAlgorithm {
-    algorithm: string;
-    oid: string;
-}
-interface ICertInfo {
-    name: string | undefined;
-    thumbprint: string;
-    subjectName: string;
-    issuerName: string;
-    validFrom: string | Date;
-    validTo: string | Date;
-    organization: string | undefined;
-    label: string | undefined;
-}
-declare class Certificate {
-    getDecodedExtendedKeyUsage: () => Promise<unknown>;
-    hasExtendedKeyUsage: (oids: string | string[]) => Promise<unknown>;
-    readonly _cert: CAPICOM.CertificateAsync;
-    thumbprint: string;
-    subjectName: string;
-    issuerName: string;
-    validFrom: string;
-    validTo: string;
-    name?: string;
-    organization?: string;
-    label?: string;
-    constructor(item: ICertificate);
-    prepareCertInfo(): void;
-    get certInfo(): ICertInfo;
-    isValid(): Promise<boolean>;
-    getProp(propName: keyof CAPICOM.CertificateAsync): Promise<string | number | object>;
-    exportBase64(): Promise<string>;
-    setCachePin(cachePin: any): Promise<void>;
-    /**
-     * Возвращает информацию об алгоритме
-     *
-     * @return {Promise} -- объект с названием алгоритма {Object}
-     * */
-    getAlgorithm(): Promise<IAlgorithm>;
-    getCertInfo(tags: TagsType, propName: 'IssuerName' | 'SubjectName'): Promise<{
-        title: string;
-        descr: string;
-        translated: boolean;
-    }[] | null>;
-    getOwnerInfo(): Promise<{
-        title: string;
-        descr: string;
-        translated: boolean;
-    }[] | null>;
-    getIssuerInfo(): Promise<{
-        title: string;
-        descr: string;
-        translated: boolean;
-    }[] | null>;
-    /**
-     * Получение OID сертификата
-     *
-     * @return {Array} Возвращает массив OID (улучшенного ключа)
-     * */
-    getExtendedKeyUsage(): Promise<string[]>;
-}
+import Certificate from './certificate';
 export declare const isValidEDSSettings: () => Promise<void>;
 /**
  * Возвращает список сертификатов, доступных в системе
@@ -114,4 +44,3 @@ export declare const signDataXML: (hash: string, dataXML: string) => Promise<str
 export declare const getSystemInfo: () => Promise<Record<string, any>>;
 export declare const isValidCSPVersion: (version: string) => Promise<boolean>;
 export declare const isValidCadesVersion: (version: string) => Promise<boolean>;
-export {};

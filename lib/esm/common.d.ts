@@ -1,3 +1,4 @@
+export declare const getErrors: (msg: string, error: Error) => string;
 export declare const subjectNameTagsTranslations: {
     possibleNames: string[];
     translation: string;

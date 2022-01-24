@@ -1,5 +1,12 @@
 /* eslint-disable new-cap */
 import oids from './oids';
+const cadesPlugin = cadesplugin;
+export const getErrors = (msg: string, error: Error) => {
+    if (cadesPlugin) {
+        return `${msg}${cadesPlugin.getLastError(error)}`;
+    }
+    return `${msg}${error.message || error.toString()}`;
+};
 // const cadesplugin = window.cadesplugin;
 const checkBrowser = () => {
     const ua = navigator.userAgent;
