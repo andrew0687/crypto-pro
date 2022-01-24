@@ -52,11 +52,19 @@ export default class Certificate {
         descr: string;
         translated: boolean;
     }[] | null>;
+    /**
+     * Разбирает SubjectName сертификата по тэгам
+     * @return {Array} - возвращает массив свойств сертификата о владельце
+     */
     getOwnerInfo(): Promise<{
         title: string;
         descr: string;
         translated: boolean;
     }[] | null>;
+    /**
+     * Разбирает IssuerName сертификата по тэгам
+     * @return {Array} - возвращает массив свойств сертификата об УЦ
+     */
     getIssuerInfo(): Promise<{
         title: string;
         descr: string;

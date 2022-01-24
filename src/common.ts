@@ -29,10 +29,10 @@ const checkBrowser = () => {
     return {name: M[0], version: M[1]};
 };
 export const subjectNameTagsTranslations = [
-    {possibleNames: ['UnstructuredName'], translation: 'Неструктурированное имя'},
+    {possibleNames: ['UnstructuredName'], translation: 'НеструктурированноеИмя'},
     {possibleNames: ['CN'], translation: 'Владелец'},
     {possibleNames: ['SN'], translation: 'Фамилия'},
-    {possibleNames: ['G'], translation: 'Имя Отчество'},
+    {possibleNames: ['G'], translation: 'ИмяОтчество'},
     {possibleNames: ['C'], translation: 'Страна'},
     {possibleNames: ['S'], translation: 'Регион'},
     {possibleNames: ['STREET'], translation: 'Адрес'},
@@ -47,7 +47,7 @@ export const subjectNameTagsTranslations = [
     {possibleNames: ['L'], translation: 'Город'},
 ];
 export const issuerNameTagsTranslations = [
-    {possibleNames: ['UnstructuredName'], translation: 'Неструктурированное имя'},
+    {possibleNames: ['UnstructuredName'], translation: 'НеструктурированноеИмя'},
     {possibleNames: ['CN'], translation: 'Удостоверяющий центр'},
     {possibleNames: ['S'], translation: 'Регион'},
     {possibleNames: ['C'], translation: 'Страна'},
@@ -65,26 +65,7 @@ export const issuerNameTagsTranslations = [
 type SubjectNameTagsType = typeof subjectNameTagsTranslations;
 type IssuerNameTagsType = typeof issuerNameTagsTranslations;
 export type TagsType = SubjectNameTagsType | IssuerNameTagsType;
-/*function generateAsyncFn(cb) {
-    const canAsync = cadesplugin.CreateObjectAsync;
-    const dynamicScriptName = cb.name || 'asyncFn';
-    cb = String(cb);
-    let args = cb.match(/^function[\s\w]*?\((.*?)\)/);
-    args = (args && args[1]) || '';
-    cb = cb.replace(/^.*?{([\s\S]*?)}$/, '$1');
-    function GeneratorFunction() {
-        return (new Function('', 'return Object.getPrototypeOf(function*(){}).constructor'))();
-    }
-    cb = String(new (canAsync ? GeneratorFunction() : Function)(args, cb));
-    cb = cb.replace(/cryptoCommon\.createObj(\([\s\S]*?\))/gm, 'cadesplugin.CreateObject' + (canAsync ? 'Async' : '') + '$1');
-    cb = cb.replace(/("|')(yield)(\1)\s*?\+\s*?\b/gm, canAsync ? '$2 ' : '');
-    if (!canAsync) {
-        cb = cb.replace(/propset_(.*?)\((.*?)\)/gm, '$1 = $2');
-    }
-    return (canAsync ?
-        'cadesplugin.async_spawn(' + cb + ');'
-        : '(' + cb + ')();') + '//# sourceURL=evaled-' + dynamicScriptName + '.js';
-}*/
+
 // Парсит информацию из строки с информацией о сертификате
 export const parseCertInfo = (tags: TagsType, infoString: string) => {
     /**

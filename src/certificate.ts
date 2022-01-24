@@ -165,12 +165,18 @@ export default class Certificate {
         return Promise.resolve(cryptoCommon.parseCertInfo(tags, propInfo));
     }
 
-    // Разбирает SubjectName сертификата по тэгам
+    /**
+     * Разбирает SubjectName сертификата по тэгам
+     * @return {Array} - возвращает массив свойств сертификата о владельце
+     */
     getOwnerInfo() {
         return this.getCertInfo(cryptoCommon.subjectNameTagsTranslations, 'SubjectName');
     }
 
-    // Разбирает IssuerName сертификата по тэгам
+    /**
+     * Разбирает IssuerName сертификата по тэгам
+     * @return {Array} - возвращает массив свойств сертификата об УЦ
+     */
     getIssuerInfo() {
         return this.getCertInfo(cryptoCommon.issuerNameTagsTranslations, 'IssuerName');
     }

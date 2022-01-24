@@ -1,7 +1,6 @@
 /* eslint-disable new-cap */
 import * as cryptoCommon from './common';
 import {getErrors} from './common';
-// import cryptoConstants from './constants';
 import Certificate from './certificate';
 
 const cadesPlugin = cadesplugin;

@@ -1,6 +1,6 @@
 {
   "name": "crypto-pro",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Библиотека для взаимодействия с КриптоПро Browser плагин",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
