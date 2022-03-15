@@ -88,7 +88,7 @@ export default class Certificate {
         let result;
         try {
             result = await cert.IsValid(); // eslint-disable-line
-            result = await result.Result;
+            result = result.Result;
         } catch (err: any) {
             return Promise.reject(getErrors('Ошибка при проверке сертификата: ', err));
         }
