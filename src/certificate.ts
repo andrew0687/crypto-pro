@@ -29,7 +29,7 @@ interface ICertInfo {
     validFrom: string | Date;
     validTo: string | Date;
     organization: string | undefined;
-    label: string | undefined;
+    // label: string | undefined;
 }
 
 export default class Certificate {
@@ -43,7 +43,6 @@ export default class Certificate {
     public readonly validTo: string;
     public name?: string;
     public organization?: string;
-    public label?: string;
     constructor(item: ICertificate) {
         this._cert = item._cert;
         this.thumbprint = item.thumbprint;
@@ -69,7 +68,7 @@ export default class Certificate {
         if (o) {
             this.organization = o[1];
         }
-        this.label = this.name + ' (до ' + this.validTo + ')';
+        // this.label = this.name + ' (до ' + this.validTo + ')';
     }
     get certInfo(): ICertInfo {
         return {
@@ -80,7 +79,7 @@ export default class Certificate {
             validFrom: this.validFrom,
             validTo: this.validTo,
             organization: this.organization,
-            label: this.label,
+            // label: this.label,
         };
     }
     // Проверяет, валиден ли сертификат
@@ -167,7 +166,7 @@ export default class Certificate {
 
     /**
      * Разбирает SubjectName сертификата по тэгам
-     * @return {Array} - возвращает массив свойств сертификата о владельце
+     * @return {Array} -- возвращает массив свойств сертификата о владельце
      */
     getOwnerInfo() {
         return this.getCertInfo(cryptoCommon.subjectNameTagsTranslations, 'SubjectName');
@@ -175,7 +174,7 @@ export default class Certificate {
 
     /**
      * Разбирает IssuerName сертификата по тэгам
-     * @return {Array} - возвращает массив свойств сертификата об УЦ
+     * @return {Array} -- возвращает массив свойств сертификата об УЦ
      */
     getIssuerInfo() {
         return this.getCertInfo(cryptoCommon.issuerNameTagsTranslations, 'IssuerName');
@@ -184,7 +183,7 @@ export default class Certificate {
     /**
      * Получение OID сертификата
      *
-     * @return {Array} Возвращает массив OID (улучшенного ключа)
+     * @return {Array} -- Возвращает массив OID (улучшенного ключа)
      * */
     async getExtendedKeyUsage() {
         const cert = this._cert;

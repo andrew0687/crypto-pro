@@ -20,7 +20,6 @@ interface ICertInfo {
     validFrom: string | Date;
     validTo: string | Date;
     organization: string | undefined;
-    label: string | undefined;
 }
 export default class Certificate {
     getDecodedExtendedKeyUsage: () => Promise<unknown>;
@@ -33,7 +32,6 @@ export default class Certificate {
     readonly validTo: string;
     name?: string;
     organization?: string;
-    label?: string;
     constructor(item: ICertificate);
     prepareCertInfo(): void;
     get certInfo(): ICertInfo;
@@ -54,7 +52,7 @@ export default class Certificate {
     }[] | null>;
     /**
      * Разбирает SubjectName сертификата по тэгам
-     * @return {Array} - возвращает массив свойств сертификата о владельце
+     * @return {Array} -- возвращает массив свойств сертификата о владельце
      */
     getOwnerInfo(): Promise<{
         title: string;
@@ -63,7 +61,7 @@ export default class Certificate {
     }[] | null>;
     /**
      * Разбирает IssuerName сертификата по тэгам
-     * @return {Array} - возвращает массив свойств сертификата об УЦ
+     * @return {Array} -- возвращает массив свойств сертификата об УЦ
      */
     getIssuerInfo(): Promise<{
         title: string;
@@ -73,7 +71,7 @@ export default class Certificate {
     /**
      * Получение OID сертификата
      *
-     * @return {Array} Возвращает массив OID (улучшенного ключа)
+     * @return {Array} -- Возвращает массив OID (улучшенного ключа)
      * */
     getExtendedKeyUsage(): Promise<string[]>;
 }
